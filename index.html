@@ -47,10 +47,7 @@
   <!-- TODO: Missing CoffeeScript 2 -->
 
   <script type="text/javascript">
-
-
     $(window).load(function(){
-
       // set center coordinates
       var coords = [34.069, -118.293];
       // set default zoom level
@@ -120,10 +117,10 @@
           });
 
           photoLayer.add(photos).addTo(map);
+        	map.fitBounds(photoLayer.getBounds());
         }
       }
-
-      </script>
+  </script>
 
     </head>
     <body>
