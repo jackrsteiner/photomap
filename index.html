@@ -48,12 +48,8 @@
 
   <script type="text/javascript">
     $(window).load(function(){
-      // set center coordinates
-      var coords = [34.069, -118.293];
-      // set default zoom level
-      var zoomLevel = 12;
-      // initialize map
-      var map = L.map('map').setView(coords, zoomLevel);
+      //Create a map
+			var map = L.map('map', { maxZoom: 18});
       // set source for map tiles
       ATTR = '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
       '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a> | ' +
@@ -65,7 +61,7 @@
       }).addTo(map);
 
       //Call the next function as soon as the page loads
-      window.onload = callForImages()
+      window.onload = callForImages();
 
       //Makes a request, loading the getimages.php file
       function callForImages() {
@@ -120,7 +116,7 @@
         	map.fitBounds(photoLayer.getBounds());
         }
       }
-    }
+    };
   </script>
 
     </head>
