@@ -1,137 +1,125 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title></title>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <meta name="robots" content="noindex, nofollow">
-  <meta name="googlebot" content="noindex, nofollow">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title></title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-  <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
-  <script type="text/javascript" src="//code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
-  <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
 
-  <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
 
-  <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-  <link rel="stylesheet" type="text/css" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css">
-  <script type="text/javascript" src="http://makinacorpus.github.io/Leaflet.Spin/spin.js/dist/spin.min.js"></script>
-  <script type="text/javascript" src="http://makinacorpus.github.io/Leaflet.Spin/leaflet.spin.js"></script>
-  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/leaflet.markercluster.js"></script>
-  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/MarkerCluster.css">
-  <script type="text/javascript" src="//rawgit.com/turban/Leaflet.Photo/gh-pages/Leaflet.Photo.js"></script>
-  <link rel="stylesheet" type="text/css" href="//rawgit.com/turban/Leaflet.Photo/gh-pages/Leaflet.Photo.css">
-  <link rel="stylesheet" type="text/css" href="https://rawgit.com/turban/Leaflet.Photo/gh-pages/examples/css/map.css">
-  <style type="text/css">
-    html,
-    body,
-    #map {
-      height: 100%;
-      width: 100%;
-      padding: 0px;
-      margin: 0px;
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      color: #333;
-    }
-
-    .infopop h4 {
-      font: 14px/16px Arial, Helvetica, sans-serif;
-      font-weight: bold;
-      margin: 0 0 0px;
-      color: #777;
-    }
-
-  </style>
-  <!-- TODO: Missing CoffeeScript 2 -->
-
-  <script type="text/javascript">
-    $(window).load(function(){
-      //Create a map
-			var map = L.map('map', { maxZoom: 18});
-      // set source for map tiles
-      ATTR = '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-      '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a> | ' +
-      '&copy; <a href="http://cartodb.com/attributions">CartoDB</a>';
-      CDB_URL = 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png';
-      // add tiles to map
-      L.tileLayer(CDB_URL, {
-        attribution: ATTR
-      }).addTo(map);
-
-      //Call the next function as soon as the page loads
-      window.onload = callForImages();
-
-      //Makes a request, loading the getimages.php file
-      function callForImages() {
-
-        //Create the request object
-        var httpReq = (window.XMLHttpRequest)?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
-
-        //When it loads,
-        httpReq.onload = function() {
-
-          //Convert the result back into JSON
-          var result = JSON.parse(httpReq.responseText);
-
-          //Load the images
-          loadImages(result);
-        }
-
-        //Request the page
-        try {
-          httpReq.open("GET", "photomap.php", true);
-          httpReq.send(null);
-        } catch(e) {
-          console.log(e);
-        }
+    <script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css">
+    <script type="text/javascript" src="http://makinacorpus.github.io/Leaflet.Spin/spin.js/dist/spin.min.js"></script>
+    <script type="text/javascript" src="http://makinacorpus.github.io/Leaflet.Spin/leaflet.spin.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/MarkerCluster.css">
+    <script type="text/javascript" src="//rawgit.com/turban/Leaflet.Photo/gh-pages/Leaflet.Photo.js"></script>
+    <link rel="stylesheet" type="text/css" href="//rawgit.com/turban/Leaflet.Photo/gh-pages/Leaflet.Photo.css">
+    <link rel="stylesheet" type="text/css" href="https://rawgit.com/turban/Leaflet.Photo/gh-pages/examples/css/map.css">
+    <style type="text/css">
+      html,
+      body,
+      #map {
+        height: 100%;
+        width: 100%;
+        padding: 0px;
+        margin: 0px;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: #333;
       }
 
-
-      //Generates the images and sticks them into the photolayer
-      function loadImages(images) {
-        var photos = [];
-        //Loop over the images
-        for(var i = 0; i < images.length; i++) {
-          photos.push({
-            lat: images[i].lat,
-            lng: images[i].lng,
-            url: images[i].filename,
-            //If you have thumbnails, switch the comments on the following lines.
-            thumbnail: images[i].filename
-            //thumbnail: images[i].thumbnail
-          });
-
-          var photoLayer = L.photo.cluster().on('click', function(evt) {
-            var photo = evt.layer.photo;
-            var template = '<img src="{url}" /></a><p>{name}</p>';
-            evt.layer.bindPopup(L.Util.template(template, photo), {
-              className: 'leaflet-popup-photo',
-              minWidth: 400
-            }).openPopup();
-          });
-
-          photoLayer.add(photos).addTo(map);
-        	map.fitBounds(photoLayer.getBounds());
-        }
+      .infopop h4 {
+        font: 14px/16px Arial, Helvetica, sans-serif;
+        font-weight: bold;
+        margin: 0 0 0px;
+        color: #777;
       }
-    };
-  </script>
 
-    </head>
-    <body>
-      <div id="map"></div>
+    </style>
+    <!-- TODO: Missing CoffeeScript 2 -->
 
+    <script type="text/javascript">
+      $(window).load(function(){
+        //Create a map
+  			var map = L.map('map', { maxZoom: 18});
+        // set source for map tiles
+        ATTR = '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+        '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a> | ' +
+        '&copy; <a href="http://cartodb.com/attributions">CartoDB</a>';
+        CDB_URL = 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png';
+        // add tiles to map
+        L.tileLayer(CDB_URL, {
+          attribution: ATTR
+        }).addTo(map);
 
-      <script>
-        // tell the embed parent frame the height of the content
-        if (window.parent && window.parent.parent){
-          window.parent.parent.postMessage(["resultsFrame", {
-            height: document.body.getBoundingClientRect().height,
-            slug: "j4rzx76m"
-          }], "*")
+        //Call the next function as soon as the page loads
+        window.onload = callForImages();
+
+        //Makes a request, loading the getimages.php file
+        function callForImages() {
+
+          //Create the request object
+          var httpReq = (window.XMLHttpRequest)?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
+
+          //When it loads,
+          httpReq.onload = function() {
+
+            //Convert the result back into JSON
+            var result = JSON.parse(httpReq.responseText);
+
+            //Load the images
+            loadImages(result);
+          }
+
+          //Request the page
+          try {
+            httpReq.open("GET", "photomap.php", true);
+            httpReq.send(null);
+          } catch(e) {
+            console.log(e);
+          }
         }
-      </script>
-    </body>
-    </html>
+
+
+        //Generates the images and sticks them into the photolayer
+        function loadImages(images) {
+          var photos = [];
+          //Loop over the images
+          for(var i = 0; i < images.length; i++) {
+            photos.push({
+              lat: images[i].lat,
+              lng: images[i].lng,
+              url: images[i].filename,
+              //If you have thumbnails, switch the comments on the following lines.
+              thumbnail: images[i].filename
+              //thumbnail: images[i].thumbnail
+            });
+
+            var photoLayer = L.photo.cluster().on('click', function(evt) {
+              var photo = evt.layer.photo;
+              var template = '<img src="{url}" /></a><p>{name}</p>';
+              evt.layer.bindPopup(L.Util.template(template, photo), {
+                className: 'leaflet-popup-photo',
+                minWidth: 400
+              }).openPopup();
+            });
+
+            photoLayer.add(photos).addTo(map);
+          	map.fitBounds(photoLayer.getBounds());
+          }
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <div id="map"></div>
+  </body>
+</html>
