@@ -105,7 +105,7 @@
 
             var photoLayer = L.photo.cluster().on('click', function(evt) {
               var photo = evt.layer.photo;
-              var template = '<img src="{url}" /></a><p>{name}</p>';
+              var template = '<img src="{url}" /></a>';
               evt.layer.bindPopup(L.Util.template(template, photo), {
                 className: 'leaflet-popup-photo',
                 minWidth: 400
