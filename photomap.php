@@ -1,7 +1,11 @@
 <?php
-
-    //The directory (relative to this file) that holds the images
+  //The directory (relative to this file) that holds the images
+  if (empty($_GET)) {
+    $dir = 'Photos';
+  }
+  else {
     $dir = $_GET['dir'];
+  }
 
 	  //The directory (relative to this file) that holds the thumbnails, they have to have the same name as the photos
 	  $thumb_dir = "Photos_Thumbnail";
